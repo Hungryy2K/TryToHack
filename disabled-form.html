@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Disabled Form Challenge</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div w3-include-html="templates/header.html"></div>
+    <div class="article">
+        <div class="pretitle" data-challenge-id="disabled-form">Form Manipulation</div>
+        <h2>Can you submit the secret coupon?</h2>
+        <p>The form below requires a secret coupon code, but the input field is disabled. Find the correct coupon code by inspecting the website's source code, then enable the field to submit it.</p>
+        
+        <form id="couponForm" class="card" style="max-width: 500px; margin-top: 20px;">
+            <h3>Redeem Your Prize</h3>
+            
+            <label for="username">Your Username:</label>
+            <input id="username" type="text" placeholder="Enter your name" required>
+            
+            <label for="coupon">Secret Coupon:</label>
+            <input id="coupon" type="text" placeholder="Find the code and enter it here" disabled>
+            
+            <button type="submit" class="button button-orange">Redeem</button>
+        </form>
+    </div>
+    <div w3-include-html="templates/footer.html"></div>
+</body>
+</html>
