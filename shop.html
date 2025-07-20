@@ -1,68 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Shop</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
-
 </head>
-
 <body>
-
     <div w3-include-html="templates/header.html"></div>
     <div class="article">
         <div class="pretitle">Unser Shop</div>
         <h2>Kannst du hier einkaufen?</h2>
-        <p>
-            In dieser Aufgabe musst du einen fiktiven Online-Shop manipulieren. Du kannst verschiedene Waren in einen Einkaufswagen hinzufügen. Das Ziel ist es, die Waren kostenlos zu erhalten. Wenn du anschließend auf "Bestellen" klickst erwartet dich eine Überraschung.
-        </p>
+        <p>In dieser Aufgabe musst du einen fiktiven Online-Shop manipulieren. Füge Waren hinzu und versuche, sie kostenlos zu erhalten.</p>
 
-        <a class="shopping-item" onclick="addToCart('Monitor', 298.99)">
+        <div class="shopping-item" data-item-name="Monitor" data-item-price="298.99">
             <h2>Computer Monitor (Curved)</h2>
             <p>Der beste Monitor für Programmierer</p>
             <div class="pretitle">298,99 €</div>
-        </a>
+            <button class="add-to-cart-btn">+</button>
+        </div>
 
-        <a class="shopping-item" onclick="addToCart('Gaming Maus', 59.48)">
+        <div class="shopping-item" data-item-name="Gaming Maus" data-item-price="59.48">
             <h2>Gaming Maus</h2>
             <p>Ein Must-Have für alle Gamer</p>
             <div class="pretitle">59,48 €</div>
-        </a>
+            <button class="add-to-cart-btn">+</button>
+        </div>
 
-
-
-        <a class="shopping-item" onclick="addToCart('Gaming Headset', 89.99)">
+        <div class="shopping-item" data-item-name="Gaming Headset" data-item-price="89.99">
             <h2>Gaming Headset</h2>
             <p>Spreche in brillianter Qualität mit deinen Freunden</p>
             <div class="pretitle">89,99 €</div>
-        </a>
+            <button class="add-to-cart-btn">+</button>
+        </div>
     </div>
 
     <div class="shoppingCart hide-mobile" id="shoppingCartContainer">
+        <div class="center"><h3>Warenkorb</h3></div>
+        <div id="orderedItems"></div>
         <div class="center">
-            <h3>Warenkorb</h3>
-        </div>
-
-        <div id="orderedItems">
-
-        </div>
-
-        <div class="center">
-            <button class="button button-orange" onclick="checkoutCart()">Bestellen</button>
+            <button class="button button-orange checkout-btn">Bestellen</button>
         </div>
     </div>
 
     <div class="center">
-        <button class="button button-orange shopping-button-mobile" onclick="checkoutCart()">Bestellen</button>
+        <button class="button button-orange shopping-button-mobile checkout-btn">Bestellen</button>
     </div>
 
     <div w3-include-html="templates/footer.html"></div>
-
+    <script src="script.js"></script>
 </body>
-
 </html>

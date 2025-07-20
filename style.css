@@ -342,3 +342,39 @@ input {
         bottom: 0;
     }
 }
+
+.shopping-item {
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    display: block;
+    position: relative;
+    cursor: pointer;
+}
+
+.shopping-item:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: black;
+}
+
+.add-to-cart-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 50px;
+    width: 50px;
+    font-size: 28px;
+    border: none;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(0,0,0,0.8);
+}
+
+.shopping-item:hover .add-to-cart-btn {
+    background-color: rgba(0, 0, 0, 0.1);
+}
