@@ -16,14 +16,20 @@ An interactive, purely client-side project to learn common web security vulnerab
 | 💎 **Premium-Status** | Unlock the exclusive premium content. |
 | 🍪 **Admin-Access** | Access the protected admin dashboard. |
 | 🏷️ **Secret Discount** | Discover and activate a secret discount at checkout. |
+| ⚙️ **Form Manipulation** | Bypass a client-side disabled form field. |
+| 👤 **IDOR** | View other user profiles by manipulating URL parameters. |
+
 
 ## 🚀 Changelog
 
-* **Project-wide Translation**: All German text in the user interface, code alerts, and comments has been translated into English to make the project accessible to a wider audience.
+* **Feature Expansion**: Added new challenges and a user progress tracking system.
+    * **New Challenges**: Implemented "Form Manipulation" and "IDOR (Insecure Direct Object Reference)" challenges.
+    * **Progress Tracking**: The application now saves completed challenges in `localStorage` and marks them with a ✅ on the main page.
+* **Project-wide Translation**: All German text in the user interface, code alerts, and comments has been translated into English.
 * **Code Modernization (`sha256.js`)**: The SHA-256 script has been completely refactored and modernized:
     * Converted from prototype-based functions to modern ES6 classes.
     * Replaced `var` with `const` and `let` for improved scope and readability.
-    * Simplified the API and removed unnecessary complexity (e.g., the `sharedMemory` feature).
+    * Simplified the API and removed unnecessary complexity.
 
 ## 🛠️ Tech Stack
 
