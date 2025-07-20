@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto+Mono:wght@400;500;700&display=swap');
 
 :root {
     --bg-color: #121212;
@@ -8,6 +8,7 @@
     --border-color: rgba(0, 255, 127, 0.2);
     --glow-color: rgba(0, 255, 127, 0.5);
     --main-font: 'Roboto Mono', monospace;
+    --heading-font: 'Poppins', sans-serif;
 }
 body {
     margin: 0;
@@ -20,7 +21,7 @@ body {
 a {
     color: var(--accent-color);
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease-in-out;
 }
 a:hover {
     color: white;
@@ -32,6 +33,8 @@ h2 {
     color: white;
     margin-block-start: 0;
     margin-block-end: 0;
+    font-family: var(--heading-font);
+    font-weight: 700;
 }
 header {
     background-color: var(--card-color);
@@ -71,13 +74,14 @@ header a {
     font-weight: 600;
     cursor: pointer;
     box-shadow: 0 0 5px var(--glow-color);
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-in-out;
     font-family: var(--main-font);
 }
 .button:hover {
     background-color: var(--accent-color);
     color: var(--bg-color);
-    box-shadow: 0 0 20px var(--glow-color);
+    box-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color);
+    transform: translateY(-2px);
 }
 .button-orange {
     background-color: var(--accent-color);
@@ -95,6 +99,7 @@ header a {
     color: rgba(180,180,180,0.5);
     box-shadow: none;
     cursor: not-allowed;
+    transform: none;
 }
 .article, .card {
     background-color: var(--card-color);
@@ -104,6 +109,13 @@ header a {
     border-radius: 8px;
     padding: 20px;
     margin: 30px 50px 0 50px;
+    transition: all 0.3s ease-in-out;
+    animation: fadeInAndUp 0.6s ease-out forwards;
+}
+.article:hover, .card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 15px var(--glow-color);
 }
 .card {
     max-width: 800px;
@@ -139,6 +151,7 @@ input {
     margin-bottom: 20px;
     font-family: var(--main-font);
     font-size: 16px;
+    transition: all 0.3s ease-in-out;
 }
 input:focus {
     outline: none;
@@ -195,11 +208,12 @@ footer {
     position: relative;
     cursor: pointer;
     border-radius: 4px;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-in-out;
 }
 .shopping-item:hover {
     border-color: var(--accent-color);
     box-shadow: 0 0 15px var(--glow-color);
+    transform: translateY(-2px);
 }
 .add-to-cart-btn {
     position: absolute;
@@ -254,5 +268,15 @@ footer {
     }
     .article, .card {
         margin: 20px;
+    }
+}
+@keyframes fadeInAndUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
