@@ -1,25 +1,25 @@
-# TryToHack - Eine Hacker-Lernplattform 👾
+# TryToHack - A Hacker Learning Platform 👾
 
-Ein interaktives, rein clientseitiges Projekt, um gängige Web-Sicherheitslücken auf spielerische Weise zu erlernen. Das Projekt wurde mit einem modernen Dark-Mode-Design und sauberem Code komplett überarbeitet.
+An interactive, purely client-side project to learn common web security vulnerabilities in a playful way. The project has been completely redesigned with a modern dark-mode design and clean code.
 
-**[➡️ Live ansehen](https://hungryy2k.github.io/trytohack/)**
+**[➡️ View Live](https://hungryy2k.github.io/trytohack/)**
 
 ## ✨ Challenges
 
-| Challenge | Ziel |
+| Challenge | Objective |
 | :--- | :--- |
-| 🔐 **Login knacken** | Verschaffe dir Zugang, ohne das Passwort zu kennen. |
-| 👁️ **Inhalte aufdecken** | Mache die unscharfen Texte lesbar und überwinde das Start-Overlay. |
-| 🔑 **Artikel entschlüsseln** | Lies den geheimen Artikel, ohne das korrekte Passwort einzugeben. |
-| 🛒 **Shop manipulieren** | Schließe eine Bestellung kostenlos ab. |
-| 💬 **XSS-Challenge** | Führe eigenen Code über die Kommentarfunktion aus. |
-| 💎 **Premium-Status** | Schalte die exklusiven Premium-Inhalte frei. |
-| 🍪 **Admin-Zugang** | Greife auf das geschützte Admin-Dashboard zu. |
-| 🏷️ **Geheimer Rabatt** | Entdecke und aktiviere einen geheimen Rabatt beim Checkout. |
+| 🔐 **Crack Login** | Gain access without knowing the password. |
+| 👁️ **Uncover Content** | Make the blurred texts readable and overcome the initial overlay. |
+| 🔑 **Decrypt Article** | Read the secret article without entering the correct password. |
+| 🛒 **Manipulate Shop** | Complete an order for free. |
+| 💬 **XSS-Challenge** | Execute your own code via the comment function. |
+| 💎 **Premium-Status** | Unlock the exclusive premium content. |
+| 🍪 **Admin-Access** | Access the protected admin dashboard. |
+| 🏷️ **Secret Discount** | Discover and activate a secret discount at checkout. |
 
 
 ## 🛠️ Tech Stack
 
 * **HTML5**
 * **CSS3** (Dark Mode, Glassmorphism, Flexbox)
-* **Vanilla JavaScript** (ES6+, gekapselt und mit Event-Listenern)
+* **Vanilla JavaScript** (ES6+, encapsulated and with event listeners)
