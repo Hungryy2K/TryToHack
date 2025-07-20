@@ -2,7 +2,7 @@
 
 Ein interaktives, rein clientseitiges Projekt, um gängige Web-Sicherheitslücken auf spielerische Weise zu erlernen. Das Projekt wurde mit einem modernen Dark-Mode-Design und sauberem Code komplett überarbeitet.
 
-**[➡️ Live-Demo ansehen](https://hungryy2k.github.io/trytohack/)**
+**[➡️ Live ansehen](https://hungryy2k.github.io/trytohack/)**
 
 ## ✨ Challenges
 
@@ -23,6 +23,3 @@ Ein interaktives, rein clientseitiges Projekt, um gängige Web-Sicherheitslücke
 * **HTML5**
 * **CSS3** (Dark Mode, Glassmorphism, Flexbox)
 * **Vanilla JavaScript** (ES6+, gekapselt und mit Event-Listenern)
-
-
-Erstellt von **Hungryy2K**
