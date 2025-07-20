@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div w3-include-html="templates/header.html"></div>
+    <div class="article">
+        <div class="pretitle" data-challenge-id="idor">Broken Access Control</div>
+        <h2>Can you find the Admin?</h2>
+        <p>You are viewing a user profile page. This page is loaded based on the `user_id` in the URL. Can you find a way to view another user's profile... perhaps even an admin's?</p>
+        
+        <div class="card" style="max-width: 600px; margin-top: 20px;">
+            <h3>User Profile</h3>
+            <p><strong>Name:</strong> <span id="profile-name"></span></p>
+            <p><strong>Email:</strong> <span id="profile-email"></span></p>
+            <p><strong>Status:</strong> <span id="profile-status"></span></p>
+        </div>
+    </div>
+    <div w3-include-html="templates/footer.html"></div>
+</body>
+</html>
