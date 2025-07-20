@@ -1,37 +1,35 @@
+/**
+ * Copyright (c) 2025 Hungryy2K
+ * A modern implementation of SHA-256.
+ */
+
 'use strict';
-const ERROR = 'input is invalid type';
+
+const K = [
+    0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1,
+    0x923f82a4, 0xab1c5ed5, 0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3,
+    0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174, 0xe49b69c1, 0xefbe4786,
+    0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+    0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147,
+    0x06ca6351, 0x14292967, 0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13,
+    0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85, 0xa2bfe8a1, 0xa81a664b,
+    0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+    0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a,
+    0x5b9cca4f, 0x682e6ff3, 0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208,
+    0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
+];
+
 const HEX_CHARS = '0123456789abcdef'.split('');
 const EXTRA = [-2147483648, 8388608, 32768, 128];
 const SHIFT = [24, 16, 8, 0];
-const K = [
-    0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
-    0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
-    0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
-    0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
-    0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
-    0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
-    0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
-    0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
-];
-const OUTPUT_TYPES = ['hex', 'array', 'digest', 'arrayBuffer'];
+
 class Sha256 {
-    constructor(is224 = false, sharedMemory = false) {
+    constructor(is224 = false) {
         this.is224 = is224;
-        this.sharedMemory = sharedMemory;
-        this.init(sharedMemory);
+        this.init();
     }
 
-    init(sharedMemory) {
-        if (sharedMemory) {
-            Sha256.blocks = Sha256.blocks || [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-            for (let i = 0; i < 17; i++) {
-                Sha256.blocks[i] = 0;
-            }
-            this.blocks = Sha256.blocks;
-        } else {
-            this.blocks = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        }
-
+    init() {
         if (this.is224) {
             this.h0 = 0xc1059ed8;
             this.h1 = 0x367cd507;
@@ -52,6 +50,7 @@ class Sha256 {
             this.h7 = 0x5be0cd19;
         }
 
+        this.blocks = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         this.block = this.start = this.bytes = this.hBytes = 0;
         this.finalized = this.hashed = false;
         this.first = true;
@@ -62,42 +61,32 @@ class Sha256 {
             return this;
         }
 
-        let
-            code,
-            index = 0,
-            i;
+        let code;
+        let index = 0;
         const length = message.length;
         const blocks = this.blocks;
-        let notString = typeof message !== 'string';
+        const isString = typeof message === 'string';
 
-        if (notString) {
-            if (typeof message === 'object' && message !== null) {
-                if (message instanceof ArrayBuffer) {
-                    message = new Uint8Array(message);
-                } else if (!Array.isArray(message) && !ArrayBuffer.isView(message)) {
-                    throw new Error(ERROR);
-                }
-            } else {
-                throw new Error(ERROR);
+        if (!isString) {
+            if (message instanceof ArrayBuffer) {
+                message = new Uint8Array(message);
+            } else if (!Array.isArray(message) && !ArrayBuffer.isView(message)) {
+                throw new TypeError('Input must be a string, ArrayBuffer, or TypedArray');
             }
         }
-
 
         while (index < length) {
             if (this.hashed) {
                 this.hashed = false;
                 blocks[0] = this.block;
-                for (i = 1; i < 17; i++) {
+                for (let i = 1; i < 17; i++) {
                     blocks[i] = 0;
                 }
             }
 
-            if (notString) {
-                for (i = this.start; index < length && i < 64; ++index) {
-                    blocks[i >> 2] |= message[index] << SHIFT[i++ & 3];
-                }
-            } else {
-                for (i = this.start; index < length && i < 64; ++index) {
+            let i = this.start;
+            if (isString) {
+                for (; index < length && i < 64; ++index) {
                     code = message.charCodeAt(index);
                     if (code < 0x80) {
                         blocks[i >> 2] |= code << SHIFT[i++ & 3];
@@ -115,6 +104,10 @@ class Sha256 {
                         blocks[i >> 2] |= (0x80 | ((code >> 6) & 0x3f)) << SHIFT[i++ & 3];
                         blocks[i >> 2] |= (0x80 | (code & 0x3f)) << SHIFT[i++ & 3];
                     }
+                }
+            } else {
+                for (; index < length && i < 64; ++index) {
+                    blocks[i >> 2] |= message[index] << SHIFT[i++ & 3];
                 }
             }
 
@@ -164,19 +157,11 @@ class Sha256 {
 
         blocks[14] = (this.hBytes << 3) | (this.bytes >>> 29);
         blocks[15] = this.bytes << 3;
-
         this.hash();
     }
 
     hash() {
-        let a = this.h0,
-            b = this.h1,
-            c = this.h2,
-            d = this.h3,
-            e = this.h4,
-            f = this.h5,
-            g = this.h6,
-            h = this.h7;
+        let a = this.h0, b = this.h1, c = this.h2, d = this.h3, e = this.h4, f = this.h5, g = this.h6, h = this.h7;
         const blocks = this.blocks;
         let s0, s1, maj, t1, t2, ch, ab, da, cd, bc;
 
@@ -224,6 +209,7 @@ class Sha256 {
             t2 = s0 + maj;
             g = (c + t1) << 0;
             c = (t1 + t2) << 0;
+
             s0 = ((c >>> 2) | (c << 30)) ^ ((c >>> 13) | (c << 19)) ^ ((c >>> 22) | (c << 10));
             s1 = ((g >>> 6) | (g << 26)) ^ ((g >>> 11) | (g << 21)) ^ ((g >>> 25) | (g << 7));
             cd = c & d;
@@ -233,6 +219,7 @@ class Sha256 {
             t2 = s0 + maj;
             f = (b + t1) << 0;
             b = (t1 + t2) << 0;
+
             s0 = ((b >>> 2) | (b << 30)) ^ ((b >>> 13) | (b << 19)) ^ ((b >>> 22) | (b << 10));
             s1 = ((f >>> 6) | (f << 26)) ^ ((f >>> 11) | (f << 21)) ^ ((f >>> 25) | (f << 7));
             bc = b & c;
@@ -258,9 +245,8 @@ class Sha256 {
         this.finalize();
         const vars = [this.h0, this.h1, this.h2, this.h3, this.h4, this.h5, this.h6, this.h7];
         let hex = '';
-        for (let i = 0; i < vars.length; i++) {
+        for (let i = 0; i < (this.is224 ? 7 : 8); i++) {
             const h = vars[i];
-            if (i === 7 && this.is224) break;
             hex +=
                 HEX_CHARS[(h >> 28) & 0x0F] + HEX_CHARS[(h >> 24) & 0x0F] +
                 HEX_CHARS[(h >> 20) & 0x0F] + HEX_CHARS[(h >> 16) & 0x0F] +
@@ -274,47 +260,39 @@ class Sha256 {
         this.finalize();
         const vars = [this.h0, this.h1, this.h2, this.h3, this.h4, this.h5, this.h6, this.h7];
         const arr = [];
-        for (let i = 0; i < vars.length; i++) {
-            if (i === 7 && this.is224) break;
+        for (let i = 0; i < (this.is224 ? 7 : 8); i++) {
             const h = vars[i];
             arr.push((h >> 24) & 0xFF, (h >> 16) & 0xFF, (h >> 8) & 0xFF, h & 0xFF);
         }
         return arr;
     }
 
-    array() {
-        return this.digest();
-    }
-
     arrayBuffer() {
         this.finalize();
         const buffer = new ArrayBuffer(this.is224 ? 28 : 32);
-        const dataView = new DataView(buffer);
-        dataView.setUint32(0, this.h0);
-        dataView.setUint32(4, this.h1);
-        dataView.setUint32(8, this.h2);
-        dataView.setUint32(12, this.h3);
-        dataView.setUint32(16, this.h4);
-        dataView.setUint32(20, this.h5);
-        dataView.setUint32(24, this.h6);
+        const view = new DataView(buffer);
+        view.setUint32(0, this.h0);
+        view.setUint32(4, this.h1);
+        view.setUint32(8, this.h2);
+        view.setUint32(12, this.h3);
+        view.setUint32(16, this.h4);
+        view.setUint32(20, this.h5);
+        view.setUint32(24, this.h6);
         if (!this.is224) {
-            dataView.setUint32(28, this.h7);
+            view.setUint32(28, this.h7);
         }
         return buffer;
     }
-
-    toString() {
-        return this.hex();
-    }
 }
-class HmacSha256 extends Sha256 {
-    constructor(key, is224 = false, sharedMemory = false) {
-        super(is224, sharedMemory);
 
+class HmacSha256 extends Sha256 {
+    constructor(key, is224 = false) {
+        super(is224);
+        
         let keyBytes = this.normalizeKey(key);
 
         if (keyBytes.length > 64) {
-            keyBytes = new Sha256(is224, true).update(keyBytes).array();
+            keyBytes = new Sha256(is224).update(keyBytes).digest();
         }
 
         const oKeyPad = new Uint8Array(64);
@@ -357,24 +335,21 @@ class HmacSha256 extends Sha256 {
             return bytes;
         }
 
-        if (typeof key !== 'object' || key === null) {
-            throw new Error(ERROR);
-        }
         if (key instanceof ArrayBuffer) {
             return new Uint8Array(key);
         }
-        if (!Array.isArray(key) && !ArrayBuffer.isView(key)) {
-            throw new Error(ERROR);
+        if (Array.isArray(key) || ArrayBuffer.isView(key)) {
+            return key;
         }
-        return key;
+        throw new TypeError('Key must be a string, ArrayBuffer, or TypedArray');
     }
 
     finalize() {
         super.finalize();
         if (this.inner) {
             this.inner = false;
-            const innerHash = this.array();
-            super.init(this.sharedMemory);
+            const innerHash = this.digest();
+            super.init();
             this.update(this.oKeyPad);
             this.update(innerHash);
             super.finalize();
@@ -382,31 +357,27 @@ class HmacSha256 extends Sha256 {
     }
 }
 
-
-const createMethod = (is224) => {
-    const method = (message) => new Sha256(is224, true).update(message).hex();
-    method.create = () => new Sha256(is224);
-    method.update = (message) => method.create().update(message);
-
-    for (const type of OUTPUT_TYPES) {
-        method[type] = (message) => new Sha256(is224, true).update(message)[type]();
-    }
-    return method;
+const createSha = (is224) => {
+    const sha = (message) => new Sha256(is224).update(message).hex();
+    sha.create = () => new Sha256(is224);
+    sha.update = (message) => sha.create().update(message);
+    sha.hex = sha;
+    sha.digest = (message) => sha.create().update(message).digest();
+    sha.arrayBuffer = (message) => sha.create().update(message).arrayBuffer();
+    return sha;
 };
 
-const createHmacMethod = (is224) => {
-    const method = (key, message) => new HmacSha256(key, is224, true).update(message).hex();
-    method.create = (key) => new HmacSha256(key, is224);
-    method.update = (key, message) => method.create(key).update(message);
-
-    for (const type of OUTPUT_TYPES) {
-        method[type] = (key, message) => new HmacSha256(key, is224, true).update(message)[type]();
-    }
-    return method;
+const createHmac = (is224) => {
+    const hmac = (key, message) => new HmacSha256(key, is224).update(message).hex();
+    hmac.create = (key) => new HmacSha256(key, is224);
+    hmac.update = (key, message) => hmac.create(key).update(message);
+    hmac.hex = hmac;
+    hmac.digest = (key, message) => hmac.create(key).update(message).digest();
+    hmac.arrayBuffer = (key, message) => hmac.create(key).update(message).arrayBuffer();
+    return hmac;
 };
 
-
-export const sha256 = createMethod(false);
-export const sha224 = createMethod(true);
-sha256.hmac = createHmacMethod(false);
-sha224.hmac = createHmacMethod(true);
+export const sha256 = createSha(false);
+export const sha224 = createSha(true);
+sha256.hmac = createHmac(false);
+sha224.hmac = createHmac(true);
