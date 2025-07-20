@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>LocalStorage Challenge</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div w3-include-html="templates/header.html"></div>
+    <div class="article">
+        <div class="pretitle">LocalStorage Challenge</div>
+        <h2>Exklusiver Premium-Artikel</h2>
+        <p>Um diesen Artikel zu lesen, benötigst du einen Premium-Status. Untersuche den `localStorage` dieser Seite, um dir Zugang zu verschaffen.</p>
+        
+        <div id="premiumArticle" style="display: none; margin-top: 20px; background-color: #fffbe6; padding: 20px; border: 1px solid #ffeeba;">
+            <h3>🎉 Herzlichen Glückwunsch! 🎉</h3>
+            <p>Du hast den Premium-Status erfolgreich freigeschaltet. Der Trick bestand darin, im `localStorage` den Wert für den Schlüssel `userStatus` auf `premium` zu setzen.</p>
+        </div>
+    </div>
+    <div w3-include-html="templates/footer.html"></div>
+    <script src="script.js"></script>
+</body>
+</html>
