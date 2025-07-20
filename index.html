@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,116 +12,74 @@
     <div id="particles-container"></div>
     <div w3-include-html="templates/header.html"></div>
     <div w3-include-html="templates/overlay.html"></div>
-    <div class="article">
+
+    <div class="article" data-challenge-id="intro">
         <div class="pretitle">IT Security</div>
         <h2>Hack this Page</h2>
-        <p>
-            This site is teeming with security vulnerabilities. Your task is to find and exploit these vulnerabilities. This way, you will playfully learn about simple hacking attacks. You will see that the art of hacking is much easier than you expect.
-            You have already solved the first task. Otherwise, you wouldn't be able to see this page.
-        </p>
-        <div class="read-more">
-            <a href="article1.html">(Read more)</a>
-        </div>
+        <p>This site is teeming with security vulnerabilities. Your task is to find and exploit these vulnerabilities. This way, you will playfully learn about simple hacking attacks.</p>
+        <div class="read-more"><a href="article1.html">(Read more)</a></div>
     </div>
-    <div class="article article-regular">
+
+    <div class="article article-regular" data-challenge-id="login">
         <div class="pretitle">Login Form</div>
         <h2>Can you crack this login?</h2>
-        <p>
-            In this task, you have to crack a login form. On the following page, you will find a login form. Here you need to enter a username and a password. Of course, neither is provided. Analyze the source code
-            of the page and try to find the credentials on your own.
-        </p>
-        <div class="read-more">
-            <a href="login.html">(Read more)</a>
-        </div>
+        <p>In this task, you have to crack a login form. Analyze the source code of the page and try to find the credentials on your own.</p>
+        <div class="read-more"><a href="login.html">(Go to challenge)</a></div>
     </div>
-    <div class="article article-regular">
+
+    <div class="article article-regular" data-challenge-id="secret-article">
         <div class="pretitle">Secret Article</div>
         <h2>Can you crack this encryption?</h2>
-        <p>
-            This article is encrypted. When you open the article, you will be prompted to enter a password. Only then can you read the article.
-        </p>
-        <div class="read-more">
-            <a href="secret-article.html">(Read more)</a>
-        </div>
+        <p>This article is encrypted. When you open the article, you will be prompted to enter a password. Only then can you read the article.</p>
+        <div class="read-more"><a href="secret-article.html">(Go to challenge)</a></div>
     </div>
-    <div class="article article-regular">
+
+    <div class="article article-regular" data-challenge-id="shop">
         <div class="pretitle">Our Shop</div>
-        <h2>Can you shop here?</h2>
-        <p>
-            In this task, you have to manipulate a fictional online shop. You can add various goods to a shopping cart. The goal is to get the goods for free. When you then click on "Order", a surprise awaits you.
-        </p>
-        <div class="read-more">
-            <a href="shop.html">(Read more)</a>
-        </div>
+        <h2>Can you manipulate the shop?</h2>
+        <p>In this task, you have to manipulate a fictional online shop. The goal is to get the goods for free. When you then click on "Order", a surprise awaits you.</p>
+        <div class="read-more"><a href="shop.html">(Go to challenge)</a></div>
     </div>
+    
+    <div class="article article-regular" data-challenge-id="xss">
+        <div class="pretitle">XSS Challenge</div>
+        <h2>Can you inject a script?</h2>
+        <p>Can you inject a script into the comment function? The goal is to execute an `alert()` dialog on the page.</p>
+        <div class="read-more"><a href="xss.html">(Go to challenge)</a></div>
+    </div>
+    
+    <div class="article article-regular" data-challenge-id="premium">
+        <div class="pretitle">LocalStorage Challenge</div>
+        <h2>Can you get premium access?</h2>
+        <p>To read a specific article, you need premium status. Investigate the page's `localStorage` to gain access.</p>
+        <div class="read-more"><a href="premium.html">(Go to challenge)</a></div>
+    </div>
+
+    <div class="article article-regular" data-challenge-id="admin">
+        <div class="pretitle">Cookie Challenge</div>
+        <h2>Can you get admin access?</h2>
+        <p>Only administrators have access here. Set the correct cookie in your browser to gain access.</p>
+        <div class="read-more"><a href="admin.html">(Go to challenge)</a></div>
+    </div>
+
+    <div class="article article-regular" data-challenge-id="disabled-form">
+        <div class="pretitle">Form Manipulation</div>
+        <h2>Can you submit the secret coupon?</h2>
+        <p>A form contains a secret coupon, but the field is disabled. Can you bypass this client-side restriction?</p>
+        <div class="read-more"><a href="disabled-form.html">(Go to challenge)</a></div>
+    </div>
+
+    <div class="article article-regular" data-challenge-id="idor">
+        <div class="pretitle">Broken Access Control (IDOR)</div>
+        <h2>Can you find the Admin?</h2>
+        <p>You are viewing a user profile page. Can you find a way to view another user's profile... perhaps even an admin's?</p>
+        <div class="read-more"><a href="profile.html?user_id=1">(Go to challenge)</a></div>
+    </div>
+
     <div w3-include-html="templates/footer.html"></div>
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
     <script>
-        tsParticles.load("particles-container", {
-            preset: "bigCircles",
-            background: {
-                color: {
-                    value: "#121212"
-                }
-            },
-            particles: {
-                number: {
-                    value: 60,
-                    density: {
-                        enable: true,
-                        area: 800
-                    }
-                },
-                color: {
-                    value: "#00ff7f"
-                },
-                shape: {
-                    type: "circle"
-                },
-                opacity: {
-                    value: 0.5
-                },
-                size: {
-                    value: { min: 1, max: 3 }
-                },
-                links: {
-                    enable: true,
-                    distance: 150,
-                    color: "#00ff7f",
-                    opacity: 0.4,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 2,
-                    direction: "none",
-                    outModes: "out"
-                }
-            },
-            interactivity: {
-                events: {
-                    onHover: {
-                        enable: true,
-                        mode: "grab"
-                    },
-                    onClick: {
-                        enable: true,
-                        mode: "push"
-                    }
-                },
-                modes: {
-                    grab: {
-                        distance: 200,
-                        links: {
-                            opacity: 1
-                        }
-                    },
-                    push: {
-                        quantity: 4
-                    }
-                }
-            }
-        });
+        tsParticles.load("particles-container", { preset: "bigCircles", background: { color: { value: "#121212" } }, particles: { number: { value: 60, density: { enable: true, area: 800 } }, color: { value: "#00ff7f" }, shape: { type: "circle" }, opacity: { value: 0.5 }, size: { value: { min: 1, max: 3 } }, links: { enable: true, distance: 150, color: "#00ff7f", opacity: 0.4, width: 1 }, move: { enable: true, speed: 2, direction: "none", outModes: "out" } }, interactivity: { events: { onHover: { enable: true, mode: "grab" }, onClick: { enable: true, mode: "push" } }, modes: { grab: { distance: 200, links: { opacity: 1 } }, push: { quantity: 4 } } } });
     </script>
 </body>
 </html>
