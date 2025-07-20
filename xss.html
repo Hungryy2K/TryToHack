@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>XSS Challenge</title>
@@ -9,14 +9,14 @@
     <div w3-include-html="templates/header.html"></div>
     <div class="article">
         <div class="pretitle">XSS Challenge</div>
-        <h2>Hinterlasse einen Kommentar</h2>
-        <p>Kannst du ein Skript in die Kommentarfunktion einschleusen? Das Ziel ist es, einen `alert()`-Dialog auf der Seite auszuführen.</p>
+        <h2>Leave a Comment</h2>
+        <p>Can you inject a script into the comment function? The goal is to execute an `alert()` dialog on the page.</p>
 
         <div class="comment-section">
-            <input type="text" id="commentInput" placeholder="Dein Kommentar..." style="width: calc(100% - 20px); margin: 20px;">
-            <button id="postCommentBtn" class="button button-orange" style="margin-left: 20px;">Posten</button>
+            <input type="text" id="commentInput" placeholder="Your comment..." style="width: calc(100% - 20px); margin: 20px;">
+            <button id="postCommentBtn" class="button button-orange" style="margin-left: 20px;">Post</button>
             <div id="commentsContainer" style="margin: 20px; border-top: 1px solid #ccc; padding-top: 20px;">
-                <h4>Kommentare:</h4>
+                <h4>Comments:</h4>
             </div>
         </div>
     </div>
