@@ -2,7 +2,7 @@
 
 An interactive, purely client-side project to learn common web security vulnerabilities in a playful way. The project has been completely redesigned with a modern dark-mode design and clean code.
 
-**[➡️ View Live](https://hungryy2k.github.io/trytohack/)**
+**[➡️ View Live](https://hungryy2k.github.io/TryToHack/)**
 
 ## ✨ Challenges
 
