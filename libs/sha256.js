@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025 Hungryy2K
+ * Copyright (c) 2025 RRelicc
  * Modern cryptographic hash library (SHA-1, SHA-224, SHA-256, SHA-384, SHA-512)
  * Version: 1.0.0
  *
